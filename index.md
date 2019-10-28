@@ -3,7 +3,8 @@
 1. The project topic is digital signal processing. This is an important topic for the course because signal processing is used in many multi media systems. Both for recording or representing sounds and for transmitting data wirelessly using electromagnetic frequencies. This project will specifically be focused on framework called Juce, which is used in the development of virtual studio technology plugins for music production. Juce is comprised of many different features but in order to stay within the scope of this course I will only document and analyze the Juce library for digital signal processing and will ignore the aspects of the framework that focus on user interface.
 1. I have not been able to acquire any performance surveys on the built in functions that exist in the Juce framework, but… There have been some very interesting projects that use the Juce framework to perform unique tasks and challenges. For example an artist that goes by the name of Imogen Heap developed a system that records hand gestures and translates these gestures into signal modifications. A video demonstration of this tool can be found here. On top of interesting projects like this there are some academic papers that describe certain processing / scheduling methods of the Juce framework. These papers do a good job highlighting specific methodologies of the framework but I am more interested in understanding what it looks like to use the Juce framework to create a synthetic signal using sine waves and sine wave mutations. 
 
-| 11,988 |  Hari Seldon and Cleon I are born on Helicon and Trantor, respectively. |
-| 12,020 | Hari Seldon arrives on Trantor to deliver his paper outlining his theory of psychohistory, a method of predicting the future along mass social change in humanity. (Events of Prelude to Foundation) |
-| 12,067 | Hari Seldon goes on trial by the Commission of Public Safety, and the Encyclopedia Galactica Foundation is exiled to/established on Terminus (Events of "The Psychohistorians" in Foundation) |
-| 12,069 | Hary Seldon dies. |
+
+| Week 1,Oct 7 - Oct 10  | Project Proposal and Website  |  
+| Week 2,Oct 14 - Oct 17 |  Isolate Important DSP Functions to survey |  
+| Week 3,Oct 21 - Oct 24 |  Get Basic Juce Application Running on Machine |  
+| Week 4,Oct 27 - Oct 30 |  Familiarization With Provided Framework Functions |
