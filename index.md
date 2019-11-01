@@ -1,5 +1,27 @@
 # Juce Digital Signal Processing
 
+## Table of Contents
+1. [Overview](overview)
+1. Introduction
+1. Problem
+1. Analysis
+1. Results
+1. Conclusion
+
+
+## Overview
+
+## Introduction
+
+## Problem
+
+## Analysis
+
+## Results
+
+## Conlusion
+
+
 ### 1)
 The project topic is digital signal processing. This is an important topic for the course because signal processing is used in many multi media systems. Both for recording or representing sounds and for transmitting data wirelessly using electromagnetic frequencies. This project will specifically be focused on framework called Juce, which is used in the development of virtual studio technology plugins for music production. Juce is comprised of many different features but in order to stay within the scope of this course I will only document and analyze the Juce library for digital signal processing and will ignore the aspects of the framework that focus on user interface.
 ### 2)
