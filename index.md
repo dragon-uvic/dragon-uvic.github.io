@@ -1,7 +1,7 @@
 # Juce Digital Signal Processing
 
 ## Table of Contents
-1. [Overview](overview)
+1. [Overview](#overview)
 1. Introduction
 1. Problem
 1. Analysis
