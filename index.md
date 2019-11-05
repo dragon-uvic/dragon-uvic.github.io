@@ -7,12 +7,30 @@
 1. [Analysis](#analysis)
 1. [Conclusion](#conclusion)
 
+## TODO
+1. Create functions testing environment
+1. Create values for unit testing purposes.
+1. Time desired tools, modules and functions
+1. Record performance in report 
+1. Translate outcome of tests to report
+
+# Challenges Overcome
+1. Installing Tools for development environment
+1. Read and determine relevant functions / modules to test
+1. Create basic virtual studio application for testing
+1. Initializing Functions to be tested 
+
 ## Overview
 In the 
 ## Introduction
+Introduction
 Computers have become a foundational aspect of the music production industry. Every musical piece that is recorded today makes use of computers to some extent. Whether it is production, recording or distribution, the software has nested itself so deeply into the music production industry it is almost impossible to create musical content without it. This report will focus primarily on the process of producing music using synthesized sounds and effects which is a popular method of music production today. 
 
 The reader of this report should be aware of the two primary software applications being discussed, Virtual Studio Technology(VST) and Digital Audio Workstation(DAW). A DAW is application music producers use to keep track of sound recordings and creations over time. From within the DAW, a producer can simulate keys being played, put effects on sounds, manipulate the timing of instruments and isolate tracks of instruments. This software is the most important application in music production for it is responsible for the majority of tasks in the creation of the song. A VST is a much smaller piece of software that runs on top of the DAW. Often a synthesizer, or audio effect, the VST is simply a plugin for the DAW. These VST’s can be vastly unique in what they do, so it is difficult to bundle all processing aspects of a VST into a single umbrella. For that reason the framework I will be looking at in this report has many features and use cases, too many features to analyze all of them. Specifically, I will be considering features that are mainstream to music information retrieval to get a clear idea of how this library stands up to real-time processing. 
+
+
+
+
 ## Problem
 
 ## Analysis
