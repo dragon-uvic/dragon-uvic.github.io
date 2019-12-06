@@ -2,7 +2,7 @@
 
 ## Table of Contents
 1. [Abstract](#abstract)  
-1. [Introduction](#1.0-introduction)
+1. [Introduction](#2.0-introduction)
     * [Background](#background)
     * [Topic](#topic)
 1. [Tools](#tools)
@@ -73,7 +73,7 @@ The last factor slowing down the system in the processing pipeline is networking
 To bring this system together there are a few things that needed to be implemented. First, the machine running this system must have an Nvidia GPU to output enough frames per second. Second, the code for creating frames must meet the standards of the Cuda library. With these two requirements met, the system should output frames at a reasonable rate for a real-time system, even at higher resolution settings. To package this program for others to use with ease the whole system would have to be ported into the JUCE framework. This would involve implementing the BigGANs model in C++ which would give users the ability to download a single application that accesses their machines microphone, extracts audio features, generates and displays frames from the BigGANs model.
 7.0 References
 
-[1] X. Steenbrugge, “About Neural Synesthesia” Available: https://vimeo.com/neuralsynesthesia/about [Accessed: 3-Dec-2019]
-[2] D. S. Chevitarese, D. Szwarcman, and M. Vellasco, “Speeding Up the Training of Neural Networks with CUDA Technology,” Artificial Intelligence and Soft Computing Lecture Notes in Computer Science, pp. 30–38, 2012.
-[3] A. Lazorenko, “TensorFlow Performance test: CPU VS GPU”, Dec 27, 2017 [online], Available: https://medium.com/@andriylazorenko/tensorflow-performance-test-cpu-vs-gpu-79fcd39170c [Accessed: 3-Dec-2019]
+* [1] X. Steenbrugge, “About Neural Synesthesia” Available: https://vimeo.com/neuralsynesthesia/about [Accessed: 3-Dec-2019]
+* [2] D. S. Chevitarese, D. Szwarcman, and M. Vellasco, “Speeding Up the Training of Neural Networks with CUDA Technology,” Artificial Intelligence and Soft Computing Lecture Notes in Computer Science, pp. 30–38, 2012.
+* [3] A. Lazorenko, “TensorFlow Performance test: CPU VS GPU”, Dec 27, 2017 [online], Available: https://medium.com/@andriylazorenko/tensorflow-performance-test-cpu-vs-gpu-79fcd39170c [Accessed: 3-Dec-2019]
 
