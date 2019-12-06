@@ -1,58 +1,79 @@
 # Juce Digital Signal Processing
 
 ## Table of Contents
-1. [Overview](#overview)
+1. [Abstract](#abstract)  
 1. [Introduction](#introduction)
-1. [Problem](#problem)
-1. [Analysis](#analysis)
-1. [Conclusion](#conclusion)
+    * [Background](#background)
+    * [Topic](#topic)
+1. [Tools](#tools)
+    * [Generative Adversarial Networks](#generative-adversarial-networks)
+1. [Architecture](#architecture)
+    * [Overview](#overview)
+    * [Audio Feature Extraction](#audio-feature-extraction-application)
+    * [Frame Generation Application](#python-frame-generative-application)
+1. [Conflicts](#conflicts)
+    * [Hardware Constraints](#hardware-constraints)
+    * [Code Optimization](#code-optimization)
+    * [Latency](#latency)
+1. [Future Work](#future-work)
+1. [References](#references)
 
-## TODO
-1. Create functions testing environment
-1. Create values for unit testing purposes.
-1. Time desired tools, modules and functions
-1. Record performance in report 
-1. Translate outcome of tests to report
+## Abstract
+This report will provide an overview of a music visualization system that I have constructed for my final project in CSC 461, Multimedia Systems. This report will explain how generative adversarial networks (GANs) operate, what they are used for, and how to adapt them for the use of visualizing music. After covering the basics of GANs this report will explain how a real-time system can be constructed to visualize music. Additionally, I will describe how I constructed the architecture of the prototype system I generated for this project.
+1.0 Report Specifications
+The report is intended to be read by an individual who has an interest in artificial intelligence, audio software production, and audio visualizations. It is assumed that the reader has at least some understanding of networking, multimedia systems, audio features, and neural networks. The contents of this report can be considered an overview of how to design a generative adversarial network that produces are in real-time given audio input. If the reader has little knowledge about artificial intelligence, some background research of convolutional neural networks will greatly increase their understanding of this report. 
 
-# Challenges Overcome
-1. Installing Tools for development environment
-1. Read and determine relevant functions / modules to test
-1. Create basic virtual studio application for testing
-1. Initializing Functions to be tested 
+## 2.0 Introduction
+#### 2.1 Background
+Having a natural attraction to music information and artificial intelligence, I took this opportunity to investigate a field of computations that combines the two of them. This discipline is relatively new and uses Generative Adversarial Networks (GANs) to create images from audio features. Some have taken the liberty to coin this field as “Neural Synesthesia”[1] and “Deep Music Visualizations”, as the names imply, the output of these systems are extremely interesting and pose a relation to the psychological phenomenon of synesthesia. On top of educating myself more on the learning process of neural networks, I was able to enjoy the attractive and unique artwork these systems produce.
 
-## Overview
-In the 
-## Introduction
-Introduction
-Computers have become a foundational aspect of the music production industry. Every musical piece that is recorded today makes use of computers to some extent. Whether it is production, recording or distribution, the software has nested itself so deeply into the music production industry it is almost impossible to create musical content without it. This report will focus primarily on the process of producing music using synthesized sounds and effects which is a popular method of music production today. 
+#### 2.3 Topic
+After viewing the work and journey of Xander Steenbrugge[1] to create high resolution renders using GANs and audio, my interest in this type of technology started to grow. Although the systems being developed for music visualizations are very impressive, I wanted to produce something unique for this project. Which is why I decided to generate a real-time GANs audio visualization program. Developing such a program raises many challenges including application interfacing, extracting/converting audio features, networking and integration. This report will look in-depth at these challenges and possible solutions to create an architecture for such an application. 
 
-The reader of this report should be aware of the two primary software applications being discussed, Virtual Studio Technology(VST) and Digital Audio Workstation(DAW). A DAW is application music producers use to keep track of sound recordings and creations over time. From within the DAW, a producer can simulate keys being played, put effects on sounds, manipulate the timing of instruments and isolate tracks of instruments. This software is the most important application in music production for it is responsible for the majority of tasks in the creation of the song. A VST is a much smaller piece of software that runs on top of the DAW. Often a synthesizer, or audio effect, the VST is simply a plugin for the DAW. These VST’s can be vastly unique in what they do, so it is difficult to bundle all processing aspects of a VST into a single umbrella. For that reason the framework I will be looking at in this report has many features and use cases, too many features to analyze all of them. Specifically, I will be considering features that are mainstream to music information retrieval to get a clear idea of how this library stands up to real-time processing. 
+## 3.1 Tools
+#### 3.1 Generative Adversarial Networks 
+Generative adversarial networks (GANs) are a relatively new class of machine learning systems developed by Ian Goodfellow and others. Ian took his knowledge of neural nets to Google where he made contributions to machine learning projects and wrote a book on deep learning. Since then, he has had a fruitful career at highly recognized companies such as OpenAI, and Apple. Needless to say, the architecture created by Ian and his team has proven to be valued by many and in my opinion still has space to fill in the field of artificial intelligence. The latest application of these networks is in artwork generation. A niche group of software developers, mathematicians and artists have been using the GAN architecture to create synthesized artistic renditions of images that have not been produced organically before.
 
+This type of machine learning has had several moments of fame in the last few years and grabbed the attention of the masses when Nvidia started using this architecture to generate human faces. They called this system Style GANs, and in this model, they specifically extract certain stylistic features from sets of facial photos such as gender, age, hair length and pose. With these distinct features, they can generate pictures of faces that have never been seen before. This image generation was very special because it is believed by many that the human brain is incapable of visualizing a face that has never actually been seen before. Now we have artificial intelligence that can generate a massive number of unique faces at random, as well as modify some specific style/feature of an already existing face. For example, these networks could change the age or gender of someone in an image.
+For my project, generating faces is not going to be very relevant, but these breakthroughs set the stage for how impressive these networks are. The model used in my application is called BigGANs which has been developed by Google. This model has been trained on a huge set of images ranging from inanimate objects, animals, landscapes, people, cities and more. To generate images you must be supplying this model an 1128 length vector. The first Thousand values are provided as a float between 0 and 1, where the index of this value maps to a class. These classes are documented and created from tags that have been applied to the training set. To provide some context, these classes may represent “marmoset”, “eel”, “ambulance”, “baseball”, etc… The last 128 values of the input vector are supposed to be noise. These noise values represent features in the image. They make the generated render appear unique from another generated image with the same class values. For example, if the classes vector was all zeros except for a single 1.0 at the index that represents dogs, by changing the noise vector, the dog will appear to have different features such as color, hairstyle, facial features, etc…
 
+#### 3.2 Juce Audio Application Framework
+JUCE is an audio application framework that is commonly used in the development of music production software. The framework uses the C++ programming language and OpenGL to provide very high-performance features for software developers. It comes with a vast library of hardware interfacing and audio feature extraction tools. It has been used on hundreds of cutting edge products in music production. It is cross-platform capabilities that make it extremely attractive and useful for those wanting to make an application quickly that can scale and transfer throughout systems homogeneously.
 
+Historically, this software has been used to develop music production software. With its many features, researchers in the field of music information retrieval have started to recognize this framework as being a viable platform for representing their work. 
+Some individuals use this framework to create an interface for their research projects. Others may use this platform for its library of audio feature extractions and fast performance. I see this framework as being very useful for visualizing audio features with its OpenGL integration and audio feature extraction toolset.
 
-## Problem
+To supply a sufficient input vector for the generative networks my project requires a certain set of features to be extracted from an external microphone. I chose JUCE for this because I know it is fast enough to extract frequency features in real-time using its fast Fourier transform(FFT), and audio input interface functions. Completing a task like this in python may not perform fast enough due to its iterative looping process. With an FFT size of 2048 in FFT extraction, the application built-in JUCE can generate values for the BigGANs input vector. In this case, frequencies will map to classes and noise. For example, if the audio input contains a high magnitude of the frequency of 440, the class at index 440 in the BigGANs model will be set to a high value. If the class at index 440 was “cat” we would expect the output to somewhat represent a cat. Due to the nature of frequencies, we can expect that neighboring classes will be present at similar times. This is caused by harmonics in the audio, where multiples of a frequency become present when a fundamental frequency is present. 
 
-## Analysis
+## 4.0 Architecture
+#### 4.1 Overview
+This audio visualizer is built on 2 programs. One program is responsible for extracting frequency from an external microphone while the other program is responsible for generating and displaying images. These two programs communicate through a user datagram protocol(UDP) socket connection. The audio feature extraction program listens to an external microphone and then formats the data to be sent over sockets with UDP to the frame generation program. The data is formatted in such a way that 2048 FFT vector values normalized between 0 and 1 are binned into 1128 values. In this format, the generative program can take this vector and feed it directly into the BigGANs model. 
 
-## Results
+# Put Figure HERE
 
-## Conlusion
+#### 4.2 Audio Feature Extraction Application
+As mentioned earlier, the JUCE application framework is used to generate the audio feature extraction program. To provide more detail, I will review the tools and processes used in this framework to perform such a task. Hardware used during the construction of this program was a Shure SM58-LC Cardioid Vocal Microphone paired with a Yamaha AG03 Mixer. The first challenge encountered while developing this application was interfacing with the external microphone. To resolve the issue, I made use of JUCE’s AudioSource Class which fills a buffer with channel data acquired from the system microphone input and pushes that onto a data stack. After successfully rendering audio input, the next task was to extract frequency information. To do this, audio input data was popped off the stack and passed into the DSP classes function frequency only forward transform. Returned from this function is an array of frequency data which was then binned into an 1128 size float vector. From there the vector was converted into a byte string and sent over the JUCE DatagramSocket class to the Python image generation program.
 
+#### 4.3 Python Frame Generative Application
+The Python program in this system is responsible for generating images from the BigGANs model. I chose the Python programming language for this task because the models have been ported to a python package which can be very easily installed and interfaced. The specific package used in this program was the pytorch_pretrained_biggan package, which contains all the characteristics of the BigGAN model. The program listens on a UDP socket for incoming data from the audio feature extraction program. Once receiving a packet over this socket, the program converts the byte string data into a numpy array. This array of classes and noise is then fed into the BigGANs model where it can generate an image from the vector of classes and noise. From here the Python program uses the open computer vision library to display the bitmap as graphic on the users machine. This pipeline has been appropriate for the generation of a prototype system but poses several performance issues that should be considered when scaling.
 
-### 1)
-The project topic is digital signal processing. This is an important topic for the course because signal processing is used in many multi media systems. Both for recording or representing sounds and for transmitting data wirelessly using electromagnetic frequencies. This project will specifically be focused on framework called Juce, which is used in the development of virtual studio technology plugins for music production. Juce is comprised of many different features but in order to stay within the scope of this course I will only document and analyze the Juce library for digital signal processing and will ignore the aspects of the framework that focus on user interface.
-### 2)
-I have not been able to acquire any performance surveys on the built in functions that exist in the Juce framework, but… There have been some very interesting projects that use the Juce framework to perform unique tasks and challenges. For example an artist that goes by the name of Imogen Heap developed a system that records hand gestures and translates these gestures into signal modifications. A video demonstration of this tool can be found here. On top of interesting projects like this there are some academic papers that describe certain processing / scheduling methods of the Juce framework. These papers do a good job highlighting specific methodologies of the framework but I am more interested in understanding what it looks like to use the Juce framework to create a synthetic signal using sine waves and sine wave mutations. 
+## 5.0 Conflicts
+The system produced for this project has been a viable proof of concept but there are a few conflicts that pose concerns if one was trying to generate a viable product. These concerns are entirely based around the amount of time it takes for the system to generate frames after processing audio input. The BigGANs model performs well but requires specific tailoring if one is to use it in a real-time system. The performance of this project did not meet the standards that one may expect for real-time audio visualization but I believe it is possible given the correct hardware. While testing the system for this project, my machine output images at a rate of 1.8fps, while producing a 128px by 128px image and 0.07fps while producing a 512px by 512px image. This frame rate is far too low for anyone to perceive this as a video and the lowest framerate that I would consider acceptable would be 25fps.
 
-### Timeline
-| Date  | Goal  | 
-|--------------|---|
-| Week 1,Oct 7 - Oct 10 |  Project Proposal and Website |  
-| Week 2   Oct 14 - Oct 17 |  Isolate Important DSP Functions to survey |  
-| Week 3   Oct 21 - Oct 24 |  Get Basic Juce Application Running on Machine |
-| Week 4   Oct 27 - Oct 30 |  Familiarization With Provided Framework Functions |  
-| Week 5   Nov 4 - Nov 7 |  Develop Performance Test |  
-| Week 6   Nov 11 - Nov 14 |  Document Performance of Desired Functionality |
-| Week 7   Nov 18 - Nov 21 |  Research Framework Structs, Scheduling, Processing Strategies and Compare to other DSP Libraries or Frameworks |  
-| Week 8   Nov 25 - Nov 28 |  Report Due |
+#### 5.1 Hardware Constraints
+It is widely known that convolutional neural networks (CNNs) perform computations much faster on graphics processing units (GPUs) than central processing units (CPUs)[2]. This is because GPU architectures are designed to perform almost exclusively matrix-style computations. While CPUs, are capable of performing such computations, the rate at which it can perform is significantly lower. As shown in Lazorenko A.‘s benchmarking article, it is not uncommon to see a consumer model GPU perform up to 54[3] times faster than an unoptimized consumer-level CPU for training convolutional neural networks. When reproducing this test on my machine I recorded an average training rate of 14 samples/second, compared to 6500 samples/second recorded on the GeForce 1070GPU. From these recorded rates we see a performance increase of 465 times faster when switching to an Nvidia 8GB 1070 GPU from an Intel i5 CPU. This number may seem extreme, but seeing performance increases in the range of 100 to 500 times faster on a GPU for CNN computations is very common. If we re-evaluate the projected performance of my proposed system with appropriate hardware, we may expect frame rates around 33fps while generating 512px by 512px frames and 830fps while generating 128px by 128px frames.
+
+#### 5.2 Code Optimization
+Unfortunately, one cannot simply plug a GPU into their machine and see performance increases as listed above. To utilize the hardware on a given machine, developers must make use of libraries that package and handoff computations to the GPU explicitly. To do so the Cuda library was developed by Nvidia to help developers make use of the hardware provided. Cuda has specific programming guidelines for each language it supports. It is relatively easy to format a Python program to utilize a GPU, my machine does not have such hardware so I had to skip this process in my project. Cuda exclusively works with Nvidia architecture, so even though my machine has a GPU there is no simple way for me to utilize it in this project.
+
+#### 5.3 Latency
+The last factor slowing down the system in the processing pipeline is networking latency. As some may already know, it takes time to send information over a network. Luckily for this system, the two programs communicating over a UDP socket are running on the same machine. This greatly reduces latency issues and lost packets. The only reason sockets are necessary for this project is because implementing the BigGANs model inside of the JUCE application would exceed the scope of this project. In this system, sockets are simply used as an application interface between two programs running on the same machine. It is possible for this system to be generated into a distributed system, where the audio signal is recorded and processed locally, and then sent to a remote machine to generate frames. However, that is also outside the scope of this project.
+
+## 6.0 Future Work
+To bring this system together there are a few things that needed to be implemented. First, the machine running this system must have an Nvidia GPU to output enough frames per second. Second, the code for creating frames must meet the standards of the Cuda library. With these two requirements met, the system should output frames at a reasonable rate for a real-time system, even at higher resolution settings. To package this program for others to use with ease the whole system would have to be ported into the JUCE framework. This would involve implementing the BigGANs model in C++ which would give users the ability to download a single application that accesses their machines microphone, extracts audio features, generates and displays frames from the BigGANs model.
+7.0 References
+
+[1] X. Steenbrugge, “About Neural Synesthesia” Available: https://vimeo.com/neuralsynesthesia/about [Accessed: 3-Dec-2019]
+[2] D. S. Chevitarese, D. Szwarcman, and M. Vellasco, “Speeding Up the Training of Neural Networks with CUDA Technology,” Artificial Intelligence and Soft Computing Lecture Notes in Computer Science, pp. 30–38, 2012.
+[3] A. Lazorenko, “TensorFlow Performance test: CPU VS GPU”, Dec 27, 2017 [online], Available: https://medium.com/@andriylazorenko/tensorflow-performance-test-cpu-vs-gpu-79fcd39170c [Accessed: 3-Dec-2019]
+
