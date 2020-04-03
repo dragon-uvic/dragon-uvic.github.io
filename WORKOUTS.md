@@ -1,9 +1,9 @@
 # Workouts
 
-### No Weights - Covid Edition
+### No Weights - COVID-19 Edition
 * [Chest](workouts/no_weight/CHEST.md)
 * [Core](workouts/no_weight/CORE.md)
-* [Shoulders & Triceps](workouts/no_weight/SHOULDERS.md)
+* [Triceps](workouts/no_weight/TRICEPS.md)
 * [Arms](workouts/no_weight/ARMS.md)
 
 ### Get Swole
