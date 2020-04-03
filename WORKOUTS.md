@@ -4,7 +4,6 @@
 * [Chest](workouts/no_weight/CHEST.md)
 * [Core](workouts/no_weight/CORE.md)
 * [Triceps](workouts/no_weight/TRICEPS.md)
-* [Arms](workouts/no_weight/ARMS.md)
 
 ### Get Swole
 
