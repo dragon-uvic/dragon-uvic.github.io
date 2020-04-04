@@ -15,4 +15,3 @@ Bench Dips | 3 | 20
 Fly Push Ups |  | 12
 Typewriter Push Ups | 3 | 10 / Side
 Archer Push Ups | 3 | 10 / Side
-Push up | Null | 1, 30sec down, 30sec up
