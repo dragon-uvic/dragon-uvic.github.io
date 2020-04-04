@@ -12,6 +12,6 @@ Excersize | Sets | Reps
 Elevated Push Ups | 3 | 15
 Deep Push Ups | 3 | 20
 Bench Dips | 3 | 20
-Fly Push Ups |  | 12
+Fly Push Ups | 3 | 12
 Typewriter Push Ups | 3 | 10 / Side
 Archer Push Ups | 3 | 10 / Side
