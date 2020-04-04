@@ -9,10 +9,10 @@ __Repeat Circuit 3 Times__
 
 Excersize | Sets | Reps
 --- | --- | ---
-90 Deg Hold | Null | 15 Seconds
-Circle Push up | Null | 8 left, 8 right
-Archer Push Up | Null | 10 left, 10 right, 10 alternating
-Explosive Negative Pushups | Null | 10, slow down fast up
-Close Grip Diver Push Up | Null | 15-20
-Elevated Push Ups | Null | 20
+Elevated Push Ups | 3 | 15
+Deep Push Ups | 3 | 20
+Bench Dips | 3 | 20
+Fly Push Ups |  | 12
+Typewriter Push Ups | 3 | 10 / Side
+Archer Push Ups | 3 | 10 / Side
 Push up | Null | 1, 30sec down, 30sec up
